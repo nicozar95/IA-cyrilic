@@ -2,6 +2,7 @@ import tensorflow as tf
 import os
 import pdb
 
+
 def read_labeled_image_list(image_list_file):
     """Reads a .txt file containing pathes and labeles
     Args:
@@ -14,30 +15,19 @@ def read_labeled_image_list(image_list_file):
     filenames = []
     labels = []
     for line in f:
-        filename, label = line[:-1].split(' ')
+        filename = line[:-1].split(" ")[0]
+        label = line[:-1].split(" ")[1]
         filenames.append(filename)
-        labels.append(int(label))
+        labels.append(str(label))
     return filenames, labels
 
-def read_images_from_disk(input_queue):
-    """Consumes a single filename and label as a ' '-delimited string.
-    Args:
-      filename_and_label_tensor: A scalar string tensor.
-    Returns:
-      Two tensors: the decoded image, and the string label.
-    """
-    label = input_queue[1]
-    file_contents = tf.read_file(input_queue[0])
-    example = tf.image.decode_png(file_contents, channels=3)
-    return example, label
-
 # Reads pfathes of images together with their labels
+filename = "./filename_images"
 image_list, label_list = read_labeled_image_list(filename)
 
-images = ops.convert_to_tensor(image_list, dtype=dtypes.string)
-labels = ops.convert_to_tensor(label_list, dtype=dtypes.int32)
+images = tf.convert_to_tensor(image_list, dtype=tf.string)
+labels = tf.convert_to_tensor(label_list, dtype=tf.string)
 
 # Makes an input queue
 input_queue = tf.train.slice_input_producer([images, labels],
-                                            num_epochs=num_epochs,
                                             shuffle=True)
