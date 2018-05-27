@@ -55,7 +55,7 @@ num_filters_conv2 = 32
 filter_size_conv3 = 3
 num_filters_conv3 = 64
 
-fc_layer_size = 128
+fc_layer_size = 278
 
 def create_weights(shape):
     return tf.Variable(tf.truncated_normal(shape, stddev=0.05))
@@ -198,9 +198,9 @@ def train(num_iteration):
             epoch = int(i / int(data.train.num_examples/batch_size))
 
             show_progress(epoch, feed_dict_tr, feed_dict_val, val_loss)
-            saver.save(session, 'dogs-cats-model')
+            saver.save(session, 'C:\\Users\\Nicolas\\Desktop\\Nico\\Develop\\IA-cyrilic\\cyrilic')
 
 
     total_iterations += num_iteration
 
-train(num_iteration=3000)
+train(num_iteration=99999)

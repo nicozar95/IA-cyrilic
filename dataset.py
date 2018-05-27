@@ -3,6 +3,8 @@ import os
 import glob
 from sklearn.utils import shuffle
 import numpy as np
+import sys
+
 
 
 def load_train(train_path, image_size, classes):
